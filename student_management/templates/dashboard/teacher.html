@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Teacher Dashboard{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>Teacher Dashboard</h2>
+    </div>
+    <div class="card-body">
+        <h3>Welcome, {{ user.username }}</h3>
+        <p>Subject: {{ user.teacher.subject }}</p>
+        
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">My Classes</h5>
+                        <p class="card-text">View and manage your classes</p>
+                        <a href="#" class="btn btn-primary">View Classes</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Assignments</h5>
+                        <p class="card-text">Create and manage assignments</p>
+                        <a href="#" class="btn btn-primary">Manage Assignments</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

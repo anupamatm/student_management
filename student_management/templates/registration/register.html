@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text-center">Register</h2>
+            </div>
+            <div class="card-body">
+                <form method="post" id="registration-form">
+                    {% csrf_token %}
+                    
+                    <!-- Main User Form -->
+                    {% for field in form %}
+                        <div class="mb-3">
+                            <label for="{{ field.id_for_label }}" class="form-label">
+                                {{ field.label }}
+                            </label>
+                            {{ field }}
+                            {% if field.help_text %}
+                                <small class="form-text text-muted">{{ field.help_text }}</small>
+                            {% endif %}
+                            {% if field.errors %}
+                                {% for error in field.errors %}
+                                    <div class="text-danger">{{ error }}</div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    
+                    <!-- Student Profile Fields -->
+                    <div id="student-fields" class="profile-fields">
+                        <h4 class="mt-4">Student Information</h4>
+                        {% for field in student_form %}
+                            <div class="mb-3">
+                                <label for="{{ field.id_for_label }}" class="form-label">
+                                    {{ field.label }}
+                                </label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    {% for error in field.errors %}
+                                        <div class="text-danger">{{ error }}</div>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <!-- Teacher Profile Fields -->
+                    <div id="teacher-fields" class="profile-fields">
+                        <h4 class="mt-4">Teacher Information</h4>
+                        {% for field in teacher_form %}
+                            <div class="mb-3">
+                                <label for="{{ field.id_for_label }}" class="form-label">
+                                    {{ field.label }}
+                                </label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    {% for error in field.errors %}
+                                        <div class="text-danger">{{ error }}</div>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary w-100">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('registration-form');
+    const userTypeSelect = document.querySelector('#id_user_type');
+    const studentFields = document.querySelector('#student-fields');
+    const teacherFields = document.querySelector('#teacher-fields');
+    
+    // Get all input fields
+    const studentInputs = studentFields.querySelectorAll('input, select, textarea');
+    const teacherInputs = teacherFields.querySelectorAll('input, select, textarea');
+    
+    function toggleFields() {
+        const selectedValue = userTypeSelect.value;
+        
+        // First, disable all profile fields
+        studentFields.style.display = 'none';
+        teacherFields.style.display = 'none';
+        
+        // Disable all inputs and remove required attribute
+        studentInputs.forEach(input => {
+            input.disabled = true;
+            input.required = false;
+        });
+        
+        teacherInputs.forEach(input => {
+            input.disabled = true;
+            input.required = false;
+        });
+        
+        // Enable and show relevant fields based on selection
+        if (selectedValue === 'student') {
+            studentFields.style.display = 'block';
+            studentInputs.forEach(input => {
+                input.disabled = false;
+                input.required = true;
+            });
+        } else if (selectedValue === 'teacher') {
+            teacherFields.style.display = 'block';
+            teacherInputs.forEach(input => {
+                input.disabled = false;
+                input.required = true;
+            });
+        }
+    }
+
+    userTypeSelect.addEventListener('change', toggleFields);
+    toggleFields(); // Run once on page load
+    
+    // Add form submission handler
+    form.addEventListener('submit', function(e) {
+        const selectedValue = userTypeSelect.value;
+        
+        // Re-enable all fields before submission to ensure data is sent
+        if (selectedValue === 'student') {
+            studentInputs.forEach(input => input.disabled = false);
+        } else if (selectedValue === 'teacher') {
+            teacherInputs.forEach(input => input.disabled = false);
+        }
+    });
+});
+</script>
+
+<style>
+.profile-fields {
+    display: none;
+}
+</style>
+{% endblock %}

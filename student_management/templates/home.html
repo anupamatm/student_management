@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - School Portal{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h1>Welcome to School Portal</h1>
+    {% if user.is_authenticated %}
+        <p>Hello, {{ user.username }}!</p>
+        <p>You are logged in as: {{ user.get_user_type_display }}</p>
+    {% else %}
+        <p>Please login or register to continue.</p>
+        <div class="mt-4">
+            <a href="{% url 'login' %}" class="btn btn-primary me-2">Login</a>
+            <a href="{% url 'register' %}" class="btn btn-success">Register</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

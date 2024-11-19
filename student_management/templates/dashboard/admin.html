@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>Admin Dashboard</h2>
+    </div>
+    <div class="card-body">
+        <h3>Welcome, {{ user.username }}</h3>
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Students</h5>
+                        <p class="card-text">Total Students: {{ students_count }}</p>
+                        <a href="#" class="btn btn-primary">Manage Students</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Teachers</h5>
+                        <p class="card-text">Total Teachers: {{ teachers_count }}</p>
+                        <a href="#" class="btn btn-primary">Manage Teachers</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">System</h5>
+                        <p class="card-text">Manage system settings</p>
+                        <a href="#" class="btn btn-primary">System Settings</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

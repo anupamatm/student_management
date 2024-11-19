@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Student Dashboard{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>Student Dashboard</h2>
+    </div>
+    <div class="card-body">
+        <h3>Welcome, {{ user.username }}</h3>
+        <p>Student ID: {{ user.student.student_id }}</p>
+        <p>Grade: {{ user.student.grade }}</p>
+        
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">My Courses</h5>
+                        <p class="card-text">View your enrolled courses</p>
+                        <a href="#" class="btn btn-primary">View Courses</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Assignments</h5>
+                        <p class="card-text">View and submit assignments</p>
+                        <a href="#" class="btn btn-primary">View Assignments</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Grades</h5>
+                        <p class="card-text">View your grades</p>
+                        <a href="#" class="btn btn-primary">View Grades</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
