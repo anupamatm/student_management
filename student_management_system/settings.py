@@ -94,7 +94,7 @@ WSGI_APPLICATION = 'student_management_system.wsgi.application'
 #     }
 # }
 DATABASES = {
-    'default': db_config(default='postgresql://todo_e40g_user:ti7erCmow4gmcsbQmFg1l69oSLkIi6Qu@dpg-csu68pt2ng1s73cd8ib0-a/todo_e40g')
+    'default': db_config(default='postgresql://todo_e40g_user:ti7erCmow4gmcsbQmFg1l69oSLkIi6Qu@dpg-csu68pt2ng1s73cd8ib0-a.oregon-postgres.render.com/todo_e40g')
 }
 
 ALLOWED_HOSTS = ['student-management-c0n5.onrender.com']

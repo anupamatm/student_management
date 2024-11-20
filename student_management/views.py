@@ -32,7 +32,7 @@ class CustomLoginView(LoginView):
 def register(request):
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
-        student_form = StudentProfileForm(request.POST)
+        # student_form = StudentProfileForm(request.POST)
         teacher_form = TeacherProfileForm(request.POST)
 
         if user_form.is_valid():
@@ -44,22 +44,22 @@ def register(request):
 
                 user_type = user_form.cleaned_data.get('user_type')
 
-                if user_type == 'student':
-                    if student_form.is_valid():
-                        student = student_form.save(commit=False)
-                        student.user = user
-                        student.save()
-                    else:
-                        if user:
-                            user.delete()
-                        messages.error(request, f'Student form errors: {student_form.errors}')
-                        return render(request, 'registration/register.html', {
-                            'form': user_form,
-                            'student_form': student_form,
-                            'teacher_form': TeacherProfileForm()
-                        })
+                # if user_type == 'student':
+                #     if student_form.is_valid():
+                #         student = student_form.save(commit=False)
+                #         student.user = user
+                #         student.save()
+                #     else:
+                #         if user:
+                #             user.delete()
+                #         messages.error(request, f'Student form errors: {student_form.errors}')
+                #         return render(request, 'registration/register.html', {
+                #             'form': user_form,
+                #             'student_form': student_form,
+                #             'teacher_form': TeacherProfileForm()
+                #         })
 
-                elif user_type == 'teacher':
+                if user_type == 'teacher':
                     if teacher_form.is_valid():
                         teacher = teacher_form.save(commit=False)
                         teacher.user = user
@@ -86,12 +86,12 @@ def register(request):
             messages.error(request, f'User form errors: {user_form.errors}')
     else:
         user_form = UserRegistrationForm()
-        student_form = StudentProfileForm()
+        # student_form = StudentProfileForm()
         teacher_form = TeacherProfileForm()
 
     return render(request, 'registration/register.html', {
         'form': user_form,
-        'student_form': student_form,
+        # 'student_form': student_form,
         'teacher_form': teacher_form
     })
 
